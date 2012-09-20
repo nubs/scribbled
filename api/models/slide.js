@@ -3,9 +3,8 @@ module.exports = function(mongoose) {
     imageUrl: String,
     title: String,
     tags: [String],
-    nodes: [
+    notes: [
       {
-        title: String,
         description: String,
         position: {x: Number, y: Number},
         sources: [{url: String, title: String}]
