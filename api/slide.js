@@ -18,5 +18,12 @@ module.exports = function(mongoose) {
     });
   });
 
+  app.post('/', function(req, res) {
+    var slide = new Slide(req.body);
+    slide.save(function(err, slide) {
+      res.send(slide);
+    });
+  });
+
   return app;
 };
