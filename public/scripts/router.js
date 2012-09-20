@@ -2,7 +2,7 @@
  * define statement acts very similarly to the require statement, but its
  * return value is used whenever somebody requires this file (in this case,
  * 'router') to pass it back to the calling code. */
-define(['backbone', 'models/slide', 'views/slide'], function(Backbone, Slide, SlideView) {
+define(['backbone', 'models/slide', 'views/slide', 'views/start'], function(Backbone, Slide, SlideView, StartView) {
   /* A backbone router is responsible for responding to changes in the url for
    * the application.  Any url goes through the routes configuration to find a
    * match (wildcards and parameters can be used) and call the appropriate
@@ -12,7 +12,8 @@ define(['backbone', 'models/slide', 'views/slide'], function(Backbone, Slide, Sl
     routes: {
       /* The empty route is the default route when no path is specified. In
        * this case lets set it up to map to the index method. */
-      '': 'index'
+      '': 'index',
+	  'start': 'start'
     },
 
     /* We don't want the router to be responsible for loading the base
@@ -42,7 +43,13 @@ define(['backbone', 'models/slide', 'views/slide'], function(Backbone, Slide, Sl
        * whenever its collection gets reset, the render will be triggered when
        * the fetch is completed and everything proceeds beautifully. */
       this.slide.fetch();
-    }
+    },
+	start: function(){
+		/* page that contain static starting points and ui for create a slide or searching for a slide*/
+		this.startView = new StartView();
+		this.appEl.append(this.startView.el);
+		this.startView.render();
+	}
   });
 
   return Router;
