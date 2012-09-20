@@ -1,7 +1,7 @@
 module.exports = function(mongoose) {
   var slideshowSchema = new mongoose.Schema({
     title: String,
-    slides: [Schema.Types.ObjectId],
+    slides: [mongoose.Schema.Types.ObjectId],
   });
 
   return mongoose.model('Slideshow', slideshowSchema);
