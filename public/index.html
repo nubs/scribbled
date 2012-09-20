@@ -3,7 +3,9 @@
   <head>
     <meta charset="utf-8" />
     <title>Chalked</title>
-    <link rel="stylesheet" href="styles/style.css" />
+    <link rel="stylesheet" href="styles/bootstrap/css/bootstrap.css" />
+	<link rel="stylesheet" href="styles/bootstrap/css/bootstrap-responsive.css" />
+	<link rel="stylesheet" href="styles/style.css" />
     <!-- RequireJS is a dependency loader.  Basically, you list the
     dependencies each of your modules have and it takes care of passing them
     into your module for you.  It comes with an r.js script as well, that we
@@ -11,12 +13,28 @@
     property, here, tells RequireJS what script to load first.  -->
     <script data-main="scripts/main" src="vendor/requirejs/require.js"></script>
   </head>
-  <body style="background-image:url('http://georgesrestaurant.com/wp-content/uploads/2010/07/Chalkboard.jpg');">
+  <body>
     <!-- In the body of our page we only want to put the stuff that is going to
     be on every page, so a header/footer and a main container for the
     application are generally all that will go here.  -->
-    <div id="app">
+	<header>
+	<h1 class="logo">Chalked Teacher's Presentation Tool</h1>
+	
+	<div class="headerRight">
+		<div class="pull-right getStartedBtn">
+			<a href=""><img src="images/getstarted.png" /></a>
+		</div>
+	</div>
+	</header>
+    <div id="app" class="containerPos">	
+	
+	<div class="note arrow_box">Added note goes here</div>
+	<br><br>
+	<div class="note arrow_box">Added note with 'remove' goes here<i class="pull-right icon-remove icon-white"></i></div>
+
     </div>
-	<div style="float:right;"><img src="/images/getstarted.png" /></div>
-  </body>
+ 
+
+
+ </body>
 </html>
