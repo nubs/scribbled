@@ -7,7 +7,12 @@ module.exports = function(mongoose) {
   var Slide = require('./models/slide')(mongoose);
 
   app.get('/', function(req, res) {
-    Slide.find(function(err, slides) {
+    var criteria = {};
+    if(req.query.tags) {
+      criteria.tags = {$in: req.query.tags};
+    }
+
+    Slide.find(criteria, function(err, slides) {
       res.send(slides);
     });
   });
