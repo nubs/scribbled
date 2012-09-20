@@ -12,5 +12,11 @@ module.exports = function(mongoose) {
     });
   });
 
+  app.get('/:id', function(req, res) {
+    Slide.findOne({_id: req.params.id}, function(err, slide) {
+      res.send(slide);
+    });
+  });
+
   return app;
 };
