@@ -6,6 +6,7 @@ module.exports = function(mongoose) {
     notes: [
       {
         description: String,
+        icon: String,
         position: {x: Number, y: Number},
         sources: [{url: String, title: String}]
       }
