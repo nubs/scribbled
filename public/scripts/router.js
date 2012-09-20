@@ -13,7 +13,7 @@ define(['backbone', 'models/slide', 'views/slide', 'views/start'], function(Back
       /* The empty route is the default route when no path is specified. In
        * this case lets set it up to map to the index method. */
       '': 'index',
-	  'start': 'start'
+      'start': 'start',
     },
 
     /* We don't want the router to be responsible for loading the base
@@ -44,12 +44,13 @@ define(['backbone', 'models/slide', 'views/slide', 'views/start'], function(Back
        * the fetch is completed and everything proceeds beautifully. */
       this.slide.fetch();
     },
-	start: function(){
-		/* page that contain static starting points and ui for create a slide or searching for a slide*/
-		this.startView = new StartView();
-		this.appEl.append(this.startView.el);
-		this.startView.render();
-	}
+
+    start: function(){
+      /* page that contain static starting points and ui for create a slide or searching for a slide*/
+      this.startView = new StartView();
+      this.appEl.append(this.startView.el);
+      this.startView.render();
+    }
   });
 
   return Router;
