@@ -25,5 +25,13 @@ module.exports = function(mongoose) {
     });
   });
 
+  app.put('/:id', function(req, res) {
+    Slide.update({_id: req.params.id}, req.body, function(err, numberAffected, raw) {
+      Slide.findOne({_id: req.params.id}, function(err, slide) {
+        res.send(slide);
+      });
+    });
+  });
+
   return app;
 };
