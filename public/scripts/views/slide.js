@@ -41,7 +41,7 @@ define(['backbone', 'handlebars', 'text!templates/slide.hbs', 'underscore'], fun
       this.imageHeight = img.height;
       var $window = $(window);
       var maxWidth = $window.width();
-      var maxHeight = $window.height()-195;
+      var maxHeight = $window.height()-205;
       var divHeight, divWidth;
       if (maxWidth/maxHeight > this.imageWidth/this.imageHeight) {
         this.$el.css('background-size', 'auto ' + maxHeight + 'px');
