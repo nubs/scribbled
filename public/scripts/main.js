@@ -10,12 +10,16 @@ require.config({
       deps: ['underscore', 'jquery'],
       exports: 'Backbone'
     },
+    jqueryui: {
+      deps: ['jquery']
+    },
     handlebars: {
       exports: 'Handlebars'
     }
   },
   paths: {
     jquery: 'https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min',
+    jqueryui: 'https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.23/jquery-ui.min',
     underscore: 'http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.3.3/underscore-min',
     backbone: 'http://cdnjs.cloudflare.com/ajax/libs/backbone.js/0.9.2/backbone-min',
     text: '../vendor/requirejs-text/text',
