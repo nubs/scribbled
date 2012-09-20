@@ -7,6 +7,7 @@ define(['backbone', 'handlebars', 'text!templates/slide.hbs', 'underscore'], fun
    * another for the 'details' page, for instance. */
   var SlideView = Backbone.View.extend({
     tagName: 'div',
+	className: 'slideContainer',
 
     /* We loaded the template into the slideTemplate above, now we go ahead and
      * compile the template into a function that takes the parameters that the
@@ -40,7 +41,7 @@ define(['backbone', 'handlebars', 'text!templates/slide.hbs', 'underscore'], fun
       this.imageHeight = img.height;
       var $window = $(window);
       var maxWidth = $window.width();
-      var maxHeight = $window.height()-150;
+      var maxHeight = $window.height()-195;
       var divHeight, divWidth;
       if (maxWidth/maxHeight > this.imageWidth/this.imageHeight) {
         this.$el.css('background-size', 'auto ' + maxHeight + 'px');
