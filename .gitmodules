@@ -1,0 +1,6 @@
+[submodule "vendor/requirejs-text"]
+	path = vendor/requirejs-text
+	url = git://github.com/requirejs/text
+[submodule "vendor/requirejs"]
+	path = vendor/requirejs
+	url = git://github.com/jrburke/requirejs
