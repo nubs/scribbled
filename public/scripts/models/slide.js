@@ -8,27 +8,18 @@ define(['backbone'], function(Backbone) {
      * our simple mongo wrapper will return. */
     idAttribute: '_id',
 
-    /* This, nonfunctional, example shows how we could override the url to pull
-     * the models by something other than id. Note that in many cases we won't
-     * even be using this as we'll be using the models from the collection. */
-    url: function() {
-      if(this.isNew()) {
-        return '/api/slides';
-      } else {
-        return '/api/slides/' + this.get('title');
-      }
-    },
+    urlRoot: '/api/slides',
 
     /* A handy feature of backbone models is the ability to do some client side
      * validation before the put/post request is made to the api.  Here, we
      * validate that the required fields are present. */
     validate: function(attributes) {
-      if (!attributes.contents) {
-        return 'Slide must have contents.';
+      if (!attributes.title) {
+        return 'Slide must have a title.';
       }
 
-      if (!attributes.sourceUrl) {
-        return 'Slide must have a source url.';
+      if (!attributes.imageUrl) {
+        return 'Slide must have an image url.';
       }
     }
   });
