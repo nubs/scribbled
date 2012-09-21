@@ -83,7 +83,8 @@ $.fn.dragscrollable = function( options ){
 			// How much did the mouse move?
 			var delta = {left: (event.clientX - event.data.lastCoord.left),
 						 top: (event.clientY - event.data.lastCoord.top)};
-			
+			//change cursor style
+			$(event.target).css('cursor','-moz-grabbing');
 			// Set the scroll position relative to what ever the scroll is now
 			event.data.scrollable.scrollLeft(
 							event.data.scrollable.scrollLeft() - delta.left);
@@ -101,6 +102,7 @@ $.fn.dragscrollable = function( options ){
 		mouseUpHandler : function(event) { // Stop scrolling
 			$.event.remove( document, "mousemove", dragscroll.mouseMoveHandler);
 			$.event.remove( document, "mouseup", dragscroll.mouseUpHandler);
+			$(event.target).css('cursor','-moz-grab');
 			if (event.data.preventDefault) {
                 event.preventDefault();
                 return false;

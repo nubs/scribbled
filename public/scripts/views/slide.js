@@ -33,6 +33,7 @@ define(['backbone', 'handlebars', 'text!templates/slide.hbs', 'underscore', 'vie
         this.zoomToX = (e.clientX - offset.left) * (this.imageWidth / target.width());
         this.zoomToY = (e.clientY - offset.top) * (this.imageHeight / target.height());
         this.render();
+		this.$('img').css('cursor','-moz-grab');
       }
     },
 
