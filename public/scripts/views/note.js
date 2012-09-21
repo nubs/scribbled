@@ -42,6 +42,21 @@ define(['backbone', 'handlebars', 'text!templates/editDialog.hbs', 'text!templat
           value.selected = true;
         }
       });
+      templateVars.iconColors = [
+          {class:"white"},
+          {class:"black"},
+          {class:"red"},
+          {class:"green"},
+          {class:"blue"},
+          {class:"yellow"},
+          {class:"purple"},
+          {class:"orange"}
+      ];
+      _.each(templateVars.iconColors, function(value, index){
+        if (templateVars.iconColors == value.class) {
+          value.selected = true;
+        }
+      });
       this.editDiv = $(this.editTemplate(templateVars));
       this.editDiv.dialog({"title": "Edit Note"});
       this.editDiv.find('#saveNoteButton').click(_.bind(this.editNoteButton, this));
@@ -54,6 +69,7 @@ define(['backbone', 'handlebars', 'text!templates/editDialog.hbs', 'text!templat
     editNoteButton: function(){
       this.model.set('description', $('#description', this.editDiv).val());
       this.model.set('icon', $(":radio:checked[name='icon']", this.editDiv).attr('id'));
+      this.model.set('iconColor', $(this.editDiv).find('#iconColor').val());
       this.model.set('position', {
         x:$("#xPos", this.editDiv).val(),
         y:$("#yPos", this.editDiv).val()

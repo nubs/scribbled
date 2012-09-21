@@ -7,6 +7,7 @@ module.exports = function(mongoose) {
       {
         description: String,
         icon: String,
+        iconColor: String,
         position: {x: Number, y: Number},
         sources: [{url: String, title: String}]
       }
