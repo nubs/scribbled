@@ -29,6 +29,8 @@ define(['underscore', 'backbone', 'views/slide'], function(_, Backbone, SlideVie
 
     /* Render is responsible for rendering the view to the element. */
     render: function() {
+      this.$el.empty();
+
       /* To render it, we'll loop over the collection and call a helper to add
        * each slide to the view. */
       this.collection.each(this.addSlide);
