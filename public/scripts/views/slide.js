@@ -43,7 +43,6 @@ define(['backbone', 'handlebars', 'text!templates/slide.hbs', 'underscore', 'vie
 
     zoomOut: function(e) {
       if (this.zoomed) {
-        console.log('zoomedOut');
         this.zoomed = false;
         this.render();
 	this.$('img').css('cursor','-moz-zoom-in');
@@ -52,12 +51,13 @@ define(['backbone', 'handlebars', 'text!templates/slide.hbs', 'underscore', 'vie
     },
 
     initialize: function(){
-      _.bindAll(this, 'render', 'sizeToFit', 'zoomIn', 'zoomOut', 'hideNotes', 'showNotes', 'triggerModel');
+      _.bindAll(this, 'render', 'sizeToFit', 'zoomIn', 'zoomOut', 'hideNotes', 'showNotes', 'triggerModel', 'showImage');
       this.model.on('change', this.render);
       this.model.on('change', this.triggerModel);
       this.options.app.on('hideNotes', this.hideNotes);
       this.options.app.on('showNotes', this.showNotes);
       this.options.app.on('zoomOut', this.zoomOut);
+      this.$el.css('display', 'none');
     },
 
     triggerModel: function(){
@@ -81,7 +81,7 @@ define(['backbone', 'handlebars', 'text!templates/slide.hbs', 'underscore', 'vie
        * element to the results of the template and we're good to go. */
       this.$el.html(this.template(this.model.toJSON()));
       this.$el.dragscrollable();
-      this.$el.find('img').on('load', this.sizeToFit);
+      this.$el.find('img').on('load', this.showImage);
       $(window).resize(this.sizeToFit);
       this.notes = this.model.get('notes');
       this.renderNotes();
@@ -100,6 +100,11 @@ define(['backbone', 'handlebars', 'text!templates/slide.hbs', 'underscore', 'vie
       }, this));
     },
 
+    showImage: function() {
+      this.sizeToFit();
+      this.$el.css('display', 'block');
+      this.$el.addClass('fade-in');
+    },
     sizeToFit: function() {
       var img = new Image();
       img.src = this.model.get('imageUrl');
