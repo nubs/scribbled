@@ -3,10 +3,16 @@ you from mixing logic into your views (all logic belongs in the javascript
 files). -->
 	<div class="startFormOption">
 		<h1>Add image url</h1>
-		<input type="text" placeholder="http://...">
-		<button type="submit" class="btn btn-info"><i class="icon-pencil icon-white icon-large"></i> Start Scribbling</i></button>
-		<h1>or search for an image</h1>
-		<input type="text" placeholder="ex. sharks, clouds, etc">
-		<button type="submit" class="btn btn-info"><i class="icon-search icon-white icon-large"></i> Search</button>
+    <form id="addImageUrl">
+      <input id="imageTitle" type="text" placeholder="Slide Title">
+      <input id="imageUrl" type="text" placeholder="http://...">
+      <button type="submit" class="btn btn-info"><i class="icon-pencil icon-white icon-large"></i> Start Scribbling</i></button>
+    </form>
+    <hr>
+    <h1>or search for an image</h1>
+    <form id="searchImages">
+      <input type="text" placeholder="ex. sharks, clouds, etc">
+      <button type="submit" class="btn btn-info"><i class="icon-search icon-white icon-large"></i> Search</button>
+    </form>
 		<h1>...we'll do the rest</h1>
 	</div>
