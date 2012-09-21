@@ -42,11 +42,14 @@ define(['backbone', 'handlebars', 'text!templates/footer.hbs', 'underscore'], fu
     template: Handlebars.compile(footerTemplate),
 
     initialize: function(){
-      _.bindAll(this, 'render', 'doSearch', 'toggleNotes', 'saveModel');
+      _.bindAll(this, 'render', 'doSearch', 'toggleNotes', 'saveModel', 'resetFullscreen');
       this.options.app.on('modelChanged', this.saveModel);
       this.notesVisible = true;
       this.editing = location.pathname.search('edit') != -1;
       this.fullscreen = false;
+      $(document).on('fullscreenchange', this.resetFullscreen);
+      $(document).on('mozfullscreenchange', this.resetFullscreen);
+      $(document).on('webkitfullscreenchange', this.resetFullscreen);
     },
 
     saveModel: function(model) {
@@ -72,6 +75,11 @@ define(['backbone', 'handlebars', 'text!templates/footer.hbs', 'underscore'], fu
       } else {
         this.options.app.trigger('hideNotes');
       }
+      this.render();
+    },
+
+    resetFullscreen: function(e) {
+      this.fullscreen = document.fullscreen || document.mozFullScreen || document.webkitIsFullScreen;
       this.render();
     },
 
