@@ -1,10 +1,13 @@
 <i class="icon-{{icon}} icon-large" {{#if iconColor}}style="color: {{iconColor}};"{{/if}} />
 <div class="note arrow_box" style="display:none;">
+<p>{{description}}</p>
+{{#each sources}}
+<a href="{{url}}">{{#if title}}{{title}}{{else}}{{url}}{{/if}}</a>
+{{/each}}
+
 {{#if isEdit}}
 <i class="icon-trash" style="float:right;"></i>
 <i class="icon-edit" style="float:right"></i>
 {{/if}}
-{{description}}
-{{#each sources}}
-<BR /><a href="{{url}}">{{#if title}}{{title}}{{else}}{{url}}{{/if}}</a>
-{{/each}}</div>
+<div style="clear:both;"></div>
+</div>
