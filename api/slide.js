@@ -44,9 +44,6 @@ module.exports = function(mongoose) {
 
   app.put('/:id', function(req, res) {
     delete req.body._id;
-    for (var i in req.body.notes) {
-      delete req.body.notes[i]._id;
-    }
     Slide.update({_id: req.params.id}, req.body, function(err, numberAffected, raw) {
       if (err) {
         res.status(500).send(err);
@@ -58,6 +55,16 @@ module.exports = function(mongoose) {
             res.send(slide);
           }
         });
+      }
+    });
+  });
+
+  app.put('/:id/notes/:noteId', function(req, res) {
+    Slide.update({_id: req.params.id, 'notes._id': req.params.noteId}, {$set: {'notes.$': req.body}}, function(err, numberAffected, raw) {
+      if (err) {
+        res.status(500).send(err);
+      } else {
+        res.send(req.body);
       }
     });
   });

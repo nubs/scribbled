@@ -226,3 +226,8 @@ h1.logo a, h1.logo a:hover {
 [class^="icon-"], [class*=" icon-"] {
   float: left;
 }
+
+.note .icon-edit {
+	float: right;
+	cursor: pointer;
+}

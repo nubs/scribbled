@@ -9,6 +9,8 @@ define(['backbone', 'handlebars', 'views/slide', 'text!templates/editDialog.hbs'
 
     editTemplate: Handlebars.compile(editDialogTemplate),
 
+    isEdit: true,
+
     events: {
       dblclick: 'createNote',
       click: 'zoomIn'
@@ -20,21 +22,24 @@ define(['backbone', 'handlebars', 'views/slide', 'text!templates/editDialog.hbs'
     },
 
     createNote: function(e){
+      var offset = this.$el.find('img:first').offset();
       templateVars = {
-        x:e.clientX,
-        y:e.clientY,
+        position: {
+          x:e.clientX - offset.left,
+          y:e.clientY - offset.top
+        },
         icons: [
-          "tag",
-          "beaker",
-          "flag",
-          "tags",
-          "camera",
-          "map-marker"
+          {class:"tag"},
+          {class:"beaker"},
+          {class:"flag"},
+          {class:"tags"},
+          {class:"camera"},
+          {class:"map-marker"}
         ]
       };
       this.editDiv = $(this.editTemplate(templateVars));
       this.editDiv.dialog({"title": "Create New Note"});
-      this.editDiv.find('#createNoteButton').click(_.bind(this.saveNewButton, this));
+      this.editDiv.find('#saveNoteButton').click(_.bind(this.saveNewButton, this));
       e.stopPropagation();
     },
 
@@ -46,7 +51,7 @@ define(['backbone', 'handlebars', 'views/slide', 'text!templates/editDialog.hbs'
           x:$("#xPos", this.editDiv).val(),
           y:$("#yPos", this.editDiv).val()
         },
-        url: [$('#link', this.editDiv).val()]
+        sources: [{url:$('#link', this.editDiv).val()}]
       };
       var notes = this.model.get('notes');
       notes.push(newNote);

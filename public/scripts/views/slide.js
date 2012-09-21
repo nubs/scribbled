@@ -1,7 +1,7 @@
 /* You'll notice here that the template dependency is a little different. The
  * requirejs-text plugin allows requirejs to load dependent strings from files.
  * Here we load the handlebars template into the string slideTemplate. */
-define(['backbone', 'handlebars', 'text!templates/slide.hbs', 'underscore', 'views/note', 'jqueryui', 'drag'], function(Backbone, Handlebars, slideTemplate, _, NoteView) {
+define(['backbone', 'handlebars', 'text!templates/slide.hbs', 'underscore', 'views/note', 'models/note', 'jqueryui', 'drag'], function(Backbone, Handlebars, slideTemplate, _, NoteView, NoteModel) {
   /* This view is meant to render a single slide to a list element.  We'd
    * probably have a few different slideTemplates, 1 for the list of them and
    * another for the 'details' page, for instance. */
@@ -12,6 +12,7 @@ define(['backbone', 'handlebars', 'text!templates/slide.hbs', 'underscore', 'vie
     imageHeight: 0,
     zoomToX: 0,
     zoomToY: 0,
+    isEdit: false,
 
     tagName: 'div',
 	className: 'slideContainer',
@@ -76,7 +77,8 @@ define(['backbone', 'handlebars', 'text!templates/slide.hbs', 'underscore', 'vie
         return;
       }
       _.each(this.notes, _.bind(function(note) {
-        var view = new NoteView({model: new Backbone.Model(note), imageHeight: this.imageHeight, imageWidth: this.imageWidth});
+        note.slideId = this.model.get('_id');
+        var view = new NoteView({model: new NoteModel(note), imageHeight: this.imageHeight, imageWidth: this.imageWidth, isEdit: this.isEdit});
         this.$el.append(view.render().el);
       }, this));
     },
