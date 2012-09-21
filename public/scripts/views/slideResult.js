@@ -15,7 +15,8 @@ define(['backbone', 'handlebars', 'text!templates/slideResult.hbs', 'underscore'
     template: Handlebars.compile(slideResultTemplate),
 
     initialize: function(){
-      _.bindAll(this, 'render', 'preserveAspectRatio');
+      _.bindAll(this, 'render', 'preserveAspectRatio', 'showImage');
+      this.$el.css('display', 'none');
     },
 
     render: function() {
@@ -28,8 +29,14 @@ define(['backbone', 'handlebars', 'text!templates/slideResult.hbs', 'underscore'
         'background-image': "url('" + this.model.get('imageUrl') + "')",
         'background-repeat': 'no-repeat'
       });
-      this.$el.find('img').on('load', this.preserveAspectRatio);
+      this.$el.find('img').on('load', this.showImage);
       return this;
+    },
+
+    showImage: function() {
+      this.preserveAspectRatio();
+      this.$el.css('display', 'inline-block');
+      this.$el.addClass('fade-in');
     },
 
     preserveAspectRatio: function() {
