@@ -5,5 +5,5 @@
 {{/if}}
 {{description}}
 {{#each sources}}
-<BR /><a href="{{url}}">{{title}}</a>
+<BR /><a href="{{url}}">{{#if title}}{{title}}{{else}}{{url}}{{/if}}</a>
 {{/each}}</div>
