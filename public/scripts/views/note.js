@@ -24,6 +24,14 @@ define(['backbone', 'handlebars', 'text!templates/note.hbs', 'underscore'], func
        * passing that into the template.  Use jquery to set the html of the
        * element to the results of the template and we're good to go. */
       this.$el.html(this.template(this.model.toJSON()));
+      if (this.options.imageWidth != 0) {
+        var ratio =  $('.slideContainer div:first').width() / this.options.imageWidth;
+        this.$el.css({
+          'left': this.model.get('position').x * ratio,
+          'top': this.model.get('position').y * ratio,
+          'position': 'absolute' 
+        });
+      }
       return this;
     }
   });

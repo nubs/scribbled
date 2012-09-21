@@ -53,12 +53,16 @@ define(['backbone', 'handlebars', 'text!templates/slide.hbs', 'underscore', 'vie
       });
       this.$el.find('img').on('load', this.sizeToFit);
       $(window).resize(this.sizeToFit);
-      var notes = this.model.get('notes');
-      _.each(notes, _.bind(function(note) {
-        var view = new NoteView({model: new Backbone.Model(note)});
+      this.notes = this.model.get('notes');
+      this.renderNotes();
+      return this;
+    },
+
+    renderNotes: function(){
+      _.each(this.notes, _.bind(function(note) {
+        var view = new NoteView({model: new Backbone.Model(note), imageHeight: this.imageHeight, imageWidth: this.imageWidth});
         this.$el.append(view.render().el);
       }, this));
-      return this;
     },
 
     sizeToFit: function() {
@@ -105,6 +109,7 @@ define(['backbone', 'handlebars', 'text!templates/slide.hbs', 'underscore', 'vie
         this.$el.find('div:first').width(divWidth);
         this.$el.find('div:first').height(divHeight);
       }
+      this.renderNotes();
     }
   });
 
