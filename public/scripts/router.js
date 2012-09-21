@@ -56,7 +56,7 @@ define(['backbone', 'models/slide', 'collections/slides', 'views/footer', 'views
 
     start: function(){
       /* page that contain static starting points and ui for create a slide or searching for a slide*/
-      this.startView = new StartView();
+      this.startView = new StartView({app: this});
       this.appEl.html(this.startView.el);
       this.startView.render();
     },

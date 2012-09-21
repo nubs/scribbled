@@ -1,13 +1,16 @@
 /* You'll notice here that the template dependency is a little different. The
  * requirejs-text plugin allows requirejs to load dependent strings from files.
  * Here we load the handlebars template into the string startTemplate. */
-define(['backbone', 'handlebars', 'text!templates/start.hbs', 'underscore'], function(Backbone, Handlebars, startTemplate, _) {
+define(['backbone', 'handlebars', 'text!templates/start.hbs', 'underscore', 'models/slide'], function(Backbone, Handlebars, startTemplate, _, Slide) {
   /* This view is meant to render a single start to a list element.  We'd
    * probably have a few different startTemplates, 1 for the list of them and
    * another for the 'details' page, for instance. */
   var StartView = Backbone.View.extend({
-    tagName: 'form',
-	className: 'startForm',
+    tagName: 'div',
+    className: 'startForm',
+    events: {
+      'submit #addImageUrl': 'addImageUrl'
+    },
 
     /* We loaded the template into the startTemplate above, now we go ahead and
      * compile the template into a function that takes the parameters that the
@@ -15,7 +18,7 @@ define(['backbone', 'handlebars', 'text!templates/start.hbs', 'underscore'], fun
     template: Handlebars.compile(startTemplate),
 
     initialize: function(){
-      _.bindAll(this, 'render');
+      _.bindAll(this, 'render', 'addImageUrl');
     },
 
     render: function() {
@@ -27,6 +30,15 @@ define(['backbone', 'handlebars', 'text!templates/start.hbs', 'underscore'], fun
       return this;
     },
 
+    addImageUrl: function(e) {
+      e.preventDefault();
+
+      var slide = new Slide({title: this.$('#imageTitle').val(), imageUrl: this.$('#imageUrl').val()});
+
+      slide.save().done(_.bind(function(data) {
+        this.options.app.navigate('slides/' + data._id, {trigger: true});
+      }, this));
+    }
   });
 
   return StartView;
