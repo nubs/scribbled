@@ -12,9 +12,29 @@ define(['backbone', 'handlebars', 'text!templates/footer.hbs', 'underscore'], fu
       submit: 'doSearch',
       'click #toggleNotes': 'toggleNotes',
       'click #edit': 'toggleEdit',
-      'click #fullscreen': 'toggleFullscreen'
+      'click #fullscreen': 'toggleFullscreen',
+      'click #learn': 'learningRegistry'
     },
 
+    learningRegistry: function(){
+      $.ajax({
+        dataType: 'jsonp',
+        url: 'http://node01.public.learningregistry.net/slice',
+        type: 'GET',
+        data: {
+          any_tags:'shark'
+        },
+        success: function(data){
+          var lrDialog = $('<div style="overflow:scroll; width:100%; height:100%;"></div>');
+          $.each(data.documents, function(index, value){
+            var link = value.resource_data_description.resource_locator;
+            console.log(link);
+            lrDialog.append('<input type="checkbox"/><a href="' + link + '">' + link + '</a><BR>');
+          });
+          lrDialog.dialog({title:'Learning Registry', minWidth:500});
+        }
+      });
+    },
 
     /* We loaded the template into the startTemplate above, now we go ahead and
      * compile the template into a function that takes the parameters that the
@@ -22,10 +42,15 @@ define(['backbone', 'handlebars', 'text!templates/footer.hbs', 'underscore'], fu
     template: Handlebars.compile(footerTemplate),
 
     initialize: function(){
-      _.bindAll(this, 'render', 'doSearch', 'toggleNotes');
+      _.bindAll(this, 'render', 'doSearch', 'toggleNotes', 'saveModel');
+      this.options.app.on('modelChanged', this.saveModel);
       this.notesVisible = true;
       this.editing = location.pathname.search('edit') != -1;
       this.fullscreen = false;
+    },
+
+    saveModel: function(model) {
+      this.model = model;
     },
 
     toggleEdit: function(){

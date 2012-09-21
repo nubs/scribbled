@@ -41,10 +41,15 @@ define(['backbone', 'handlebars', 'text!templates/slide.hbs', 'underscore', 'vie
     },
 
     initialize: function(){
-      _.bindAll(this, 'render', 'sizeToFit', 'zoomIn', 'hideNotes', 'showNotes');
+      _.bindAll(this, 'render', 'sizeToFit', 'zoomIn', 'hideNotes', 'showNotes', 'triggerModel');
       this.model.on('change', this.render);
+      this.model.on('change', this.triggerModel);
       this.options.app.on('hideNotes', this.hideNotes);
       this.options.app.on('showNotes', this.showNotes);
+    },
+
+    triggerModel: function(){
+      this.options.app.trigger('modelChanged', this.model);
     },
 
     hideNotes: function() {
