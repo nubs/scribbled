@@ -29,7 +29,7 @@ define(['backbone', 'handlebars', 'views/slide', 'text!templates/editDialog.hbs'
           y:e.clientY - offset.top
         },
         icons: [
-          {class:"tag"},
+          {class:"tag", selected:true},
           {class:"beaker"},
           {class:"flag"},
           {class:"tags"},
