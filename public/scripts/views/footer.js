@@ -47,7 +47,6 @@ define(['backbone', 'handlebars', 'text!templates/footer.hbs', 'underscore'], fu
           var lrDialog = $('<ul class="registryList" style="overflow:scroll-y; width:100%; height:100%;"></ul>');
           $.each(data.documents, function(index, value){
             var link = value.resource_data_description.resource_locator;
-            console.log(link);
             lrDialog.append('<li><input type="checkbox"/><a href="' + link + '">' + link + '</a></li>');
           });
           lrDialog.dialog({title:'Learning Registry', minWidth:500});
