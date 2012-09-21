@@ -14,6 +14,7 @@ define(['backbone', 'models/slide', 'collections/slides', 'views/footer', 'views
        * this case lets set it up to map to the index method. */
       '': 'index',
       'start': 'start',
+      'slides/:id': 'slide',
       'search/:tags': 'search'
     },
 
@@ -28,25 +29,29 @@ define(['backbone', 'models/slide', 'collections/slides', 'views/footer', 'views
     },
 
     index: function() {
+      this.slide('505b35d48160ce21de864146');
+    },
+
+    slide: function(id) {
       /* Here, we create a new collection that we will be fetching from our api. */
-      this.slide = new Slide({_id:'505b35d48160ce21de864146'});
+      var slide = new Slide({_id: id});
 
       /* The pailsView renders a collection of pails, so we use the Backbone.js
        * collection parameter to define the collection that the pails view
        * uses. */
-      this.slideView = new SlideView({model: this.slide});
+      var slideView = new SlideView({model: slide});
 
       /* Even though we haven't caused the pailsView to render yet, it already
        * has an element assigned to it (all views do), so lets go ahead and
        * attach its element to the DOM. */
-      this.appEl.html(this.slideView.el);
+      this.appEl.html(slideView.el);
 
       /* Now that we have the pails collection hooked into a view, and that
        * view is hooked into the application, we can go ahead and fetch the
        * pails from the API.  Because the pails view is setup to render
        * whenever its collection gets reset, the render will be triggered when
        * the fetch is completed and everything proceeds beautifully. */
-      this.slide.fetch();
+      slide.fetch();
     },
 
     start: function(){
