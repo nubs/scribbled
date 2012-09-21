@@ -1,0 +1,14 @@
+<div>
+<input type="hidden" id="xPos" value="{{x}}" />
+<input type="hidden" id="yPos" value="{{y}}" />
+<label>Description</label><textarea id="description"></textarea>
+<label>Links</label><input type="text" id="link" />
+<label>Icon</label>
+{{#each icons}}
+<div class="pull-left" style="margin-right:10px;">
+<input class="pull-left" type="radio" name="icon" id="{{this}}" />
+<label for="{{this}}" class="icon-{{this}}"></label>
+</div>
+{{/each}}
+<button id="createNoteButton"><i class="icon-save icon-large icon-white"></i>&nbsp;Save</button>
+</div>
