@@ -30,7 +30,7 @@ define(['backbone', 'models/slide', 'collections/slides', 'views/footer', 'views
     },
 
     index: function() {
-      this.slide('505b35d48160ce21de864146');
+      this.slide('505c80752932c4db13000007');
     },
 
     slide: function(id) {
