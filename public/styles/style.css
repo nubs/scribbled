@@ -114,6 +114,7 @@ h1.logo a, h1.logo a:hover {
 }
 .slideContainer img{
 	cursor:crosshair;
+	max-width: none;
 }
 
 .slides li{
