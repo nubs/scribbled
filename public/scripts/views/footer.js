@@ -7,9 +7,10 @@ define(['backbone', 'handlebars', 'text!templates/footer.hbs', 'underscore'], fu
    * another for the 'details' page, for instance. */
   var FooterView = Backbone.View.extend({
     tagName: 'form',
-    className: 'footerSearch',
+    className: 'footerSearch form-inline',
     events: {
-      submit: 'doSearch'
+      submit: 'doSearch',
+      'click #hideNotes': 'toggleNotes'
     },
 
     /* We loaded the template into the startTemplate above, now we go ahead and
@@ -18,7 +19,15 @@ define(['backbone', 'handlebars', 'text!templates/footer.hbs', 'underscore'], fu
     template: Handlebars.compile(footerTemplate),
 
     initialize: function(){
-      _.bindAll(this, 'render', 'doSearch');
+      _.bindAll(this, 'render', 'doSearch', 'toggleNotes');
+    },
+
+    toggleNotes: function(e) {
+      if (e.currentTarget.checked) {
+        this.options.app.trigger('hideNotes');
+      } else {
+        this.options.app.trigger('showNotes');
+      }
     },
 
     render: function() {

@@ -25,6 +25,8 @@ define(['backbone', 'handlebars', 'text!templates/slide.hbs', 'underscore', 'vie
       click: 'zoomIn'
     },
 
+    displayNotes: true,
+
     zoomIn: function(e) {
       if (!this.zoomed) {
         this.zoomed = true;
@@ -38,8 +40,20 @@ define(['backbone', 'handlebars', 'text!templates/slide.hbs', 'underscore', 'vie
     },
 
     initialize: function(){
-      _.bindAll(this, 'render', 'sizeToFit', 'zoomIn');
+      _.bindAll(this, 'render', 'sizeToFit', 'zoomIn', 'hideNotes', 'showNotes');
       this.model.on('change', this.render);
+      this.options.app.on('hideNotes', this.hideNotes);
+      this.options.app.on('showNotes', this.showNotes);
+    },
+
+    hideNotes: function() {
+      this.displayNotes = false;
+      this.renderNotes();
+    },
+
+    showNotes: function() {
+      this.displayNotes = true;
+      this.renderNotes();
     },
 
     render: function() {
@@ -58,6 +72,9 @@ define(['backbone', 'handlebars', 'text!templates/slide.hbs', 'underscore', 'vie
 
     renderNotes: function(){
       this.$el.find('.noteContainer').remove();
+      if (!this.displayNotes) {
+        return;
+      }
       _.each(this.notes, _.bind(function(note) {
         var view = new NoteView({model: new Backbone.Model(note), imageHeight: this.imageHeight, imageWidth: this.imageWidth});
         this.$el.append(view.render().el);

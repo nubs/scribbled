@@ -39,7 +39,7 @@ define(['backbone', 'models/slide', 'collections/slides', 'views/footer', 'views
       /* The pailsView renders a collection of pails, so we use the Backbone.js
        * collection parameter to define the collection that the pails view
        * uses. */
-      var slideView = new SlideView({model: slide});
+      var slideView = new SlideView({model: slide, app: this});
 
       /* Even though we haven't caused the pailsView to render yet, it already
        * has an element assigned to it (all views do), so lets go ahead and
