@@ -21,15 +21,15 @@ define(['backbone', 'handlebars', 'text!templates/footer.hbs', 'underscore'], fu
 
     initialize: function(){
       _.bindAll(this, 'render', 'doSearch', 'toggleNotes');
-	  this.notesHidden= true;
+      this.notesVisible = true;
     },
 
     toggleNotes: function(e) {
-      this.notesHidden = !this.notesHidden;
-      if (this.notesHidden) {
-        this.options.app.trigger('hideNotes');
-      } else {
+      this.notesVisible = !this.notesVisible;
+      if (this.notesVisible) {
         this.options.app.trigger('showNotes');
+      } else {
+        this.options.app.trigger('hideNotes');
       }
       this.render();
     },
@@ -39,7 +39,7 @@ define(['backbone', 'handlebars', 'text!templates/footer.hbs', 'underscore'], fu
        * into an object that just has the data fields (toJSON does this) and
        * passing that into the template.  Use jquery to set the html of the
        * element to the results of the template and we're good to go. */
-      this.$el.html(this.template({notesHidden: this.notesHidden}));
+      this.$el.html(this.template({notesVisible: this.notesVisible}));
       return this;
     },
 
