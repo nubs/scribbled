@@ -1,7 +1,7 @@
 /* You'll notice here that the template dependency is a little different. The
  * requirejs-text plugin allows requirejs to load dependent strings from files.
  * Here we load the handlebars template into the string slideTemplate. */
-define(['backbone', 'handlebars', 'text!templates/slide.hbs', 'underscore', 'views/note', 'jqueryui'], function(Backbone, Handlebars, slideTemplate, _, NoteView) {
+define(['backbone', 'handlebars', 'text!templates/slide.hbs', 'underscore', 'views/note', 'jqueryui', 'drag'], function(Backbone, Handlebars, slideTemplate, _, NoteView) {
   /* This view is meant to render a single slide to a list element.  We'd
    * probably have a few different slideTemplates, 1 for the list of them and
    * another for the 'details' page, for instance. */
@@ -47,6 +47,7 @@ define(['backbone', 'handlebars', 'text!templates/slide.hbs', 'underscore', 'vie
        * passing that into the template.  Use jquery to set the html of the
        * element to the results of the template and we're good to go. */
       this.$el.html(this.template(this.model.toJSON()));
+      this.$el.dragscrollable();
       this.$el.find('img').on('load', this.sizeToFit);
       $(window).resize(this.sizeToFit);
       this.notes = this.model.get('notes');
