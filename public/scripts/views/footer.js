@@ -31,7 +31,7 @@ define(['backbone', 'handlebars', 'text!templates/footer.hbs', 'underscore'], fu
     },
 
     social: function(){
-      var socialDialog = $('<div><iframe src="//www.facebook.com/plugins/like.php?href=http%3A%2F%2Fchalked.herokuapp.com%2F&amp;send=false&amp;layout=standard&amp;width=0&amp;show_faces=false&amp;action=like&amp;colorscheme=dark&amp;font=arial&amp;height=35&amp;appId=251609031597984" scrolling="no" frameborder="0" style="border:none; overflow:hidden; height:35px;" allowTransparency="true"></iframe></div>');
+      var socialDialog = $('<div style="overflow:hidden;"><iframe src="//www.facebook.com/plugins/like.php?href=http%3A%2F%2Fchalked.herokuapp.com%2F&amp;send=false&amp;layout=standard&amp;width=0&amp;show_faces=false&amp;action=like&amp;colorscheme=dark&amp;font=arial&amp;height=35&amp;appId=251609031597984" scrolling="no" frameborder="0" style="border:none; overflow:hidden; height:35px;" allowTransparency="true"></iframe></div>');
       socialDialog.dialog({title:'Share'});
     },
 
