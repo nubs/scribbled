@@ -25,8 +25,8 @@ define(['backbone', 'handlebars', 'views/slide', 'text!templates/editDialog.hbs'
       var offset = this.$el.find('img:first').offset();
       templateVars = {
         position: {
-          x:e.clientX - offset.left + this.$el.scrollLeft(),
-          y:e.clientY - offset.top + this.$el.scrollTop(),
+          x:e.clientX - offset.left,
+          y:e.clientY - offset.top
         },
         icons: [
           {class:"tag"},
