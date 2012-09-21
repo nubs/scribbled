@@ -13,6 +13,9 @@ require.config({
     jqueryui: {
       deps: ['jquery']
     },
+    drag: {
+      deps: ['jquery']
+    },
     handlebars: {
       exports: 'Handlebars'
     }
@@ -23,6 +26,7 @@ require.config({
     underscore: 'http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.3.3/underscore-min',
     backbone: 'http://cdnjs.cloudflare.com/ajax/libs/backbone.js/0.9.2/backbone-min',
     text: '../vendor/requirejs-text/text',
+    drag: '/scripts/dragscrollable',
     handlebars: 'http://cdnjs.cloudflare.com/ajax/libs/handlebars.js/1.0.0.beta6/handlebars.min'
   }
 });
