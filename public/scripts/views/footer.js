@@ -41,15 +41,15 @@ define(['backbone', 'handlebars', 'text!templates/footer.hbs', 'underscore'], fu
         url: 'http://node01.public.learningregistry.net/slice',
         type: 'GET',
         data: {
-          any_tags:'shark'
+          any_tags:this.model.get('tags').join(',')
         },
         success: function(data){
-          var lrDialog = $('<ul class="registryList" style="overflow:scroll-y; width:100%; height:100%;"></ul>');
+          var lrDialog = $('<ul class="registryList" style="overflow:scroll; width:100%; height:100%;"></ul>');
           $.each(data.documents, function(index, value){
             var link = value.resource_data_description.resource_locator;
-            lrDialog.append('<li><input type="checkbox"/><a href="' + link + '">' + link + '</a></li>');
+            lrDialog.append('<li><input type="checkbox"/><a href="' + link + '" target="_blank">' + link + '</a></li>');
           });
-          lrDialog.dialog({title:'Learning Registry', minWidth:500});
+          lrDialog.dialog({title:'Learning Registry', width:500, height:500});
         }
       });
     },
@@ -60,7 +60,7 @@ define(['backbone', 'handlebars', 'text!templates/footer.hbs', 'underscore'], fu
     template: Handlebars.compile(footerTemplate),
 
     initialize: function(){
-      _.bindAll(this, 'render', 'doSearch', 'toggleNotes', 'saveModel', 'resetFullscreen', 'zoomIn', 'zoomOut');
+      _.bindAll(this, 'render', 'doSearch', 'toggleNotes', 'saveModel', 'resetFullscreen', 'zoomIn', 'zoomOut', 'learningRegistry');
       this.options.app.on('modelChanged', this.saveModel);
       this.options.app.on('zoomIn', this.zoomIn);
       this.notesVisible = true;
