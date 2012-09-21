@@ -40,6 +40,9 @@ define(['backbone', 'handlebars', 'views/slide', 'text!templates/editDialog.hbs'
       this.editDiv = $(this.editTemplate(templateVars));
       this.editDiv.dialog({"title": "Create New Note"});
       this.editDiv.find('#saveNoteButton').click(_.bind(this.saveNewButton, this));
+      this.editDiv.find('#learnRegLink').click(function(){
+        $('#learn').click();
+      });
       e.stopPropagation();
     },
 
