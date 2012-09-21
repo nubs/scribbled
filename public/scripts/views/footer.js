@@ -44,11 +44,11 @@ define(['backbone', 'handlebars', 'text!templates/footer.hbs', 'underscore'], fu
           any_tags:'shark'
         },
         success: function(data){
-          var lrDialog = $('<div style="overflow:scroll; width:100%; height:100%;"></div>');
+          var lrDialog = $('<ul class="registryList" style="overflow:scroll-y; width:100%; height:100%;"></ul>');
           $.each(data.documents, function(index, value){
             var link = value.resource_data_description.resource_locator;
             console.log(link);
-            lrDialog.append('<input type="checkbox"/><a href="' + link + '">' + link + '</a><BR>');
+            lrDialog.append('<li><input type="checkbox"/><a href="' + link + '">' + link + '</a></li>');
           });
           lrDialog.dialog({title:'Learning Registry', minWidth:500});
         }
