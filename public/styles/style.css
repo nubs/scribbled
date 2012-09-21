@@ -159,9 +159,9 @@ h1.logo a, h1.logo a:hover {
     -moz-animation-fill-mode:forwards;
     animation-fill-mode:forwards;
  
-    -webkit-animation-duration:1s;
-    -moz-animation-duration:1s;
-    animation-duration:1s;
+    -webkit-animation-duration:.3s;
+    -moz-animation-duration:.3s;
+    animation-duration:.3s;
 }
 }
 /***css arrow top***/
