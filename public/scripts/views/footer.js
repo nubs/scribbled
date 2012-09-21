@@ -13,7 +13,6 @@ define(['backbone', 'handlebars', 'text!templates/footer.hbs', 'underscore'], fu
       'click #toggleNotes': 'toggleNotes'
     },
 
-    notesHidden: false,
 
     /* We loaded the template into the startTemplate above, now we go ahead and
      * compile the template into a function that takes the parameters that the
@@ -22,6 +21,7 @@ define(['backbone', 'handlebars', 'text!templates/footer.hbs', 'underscore'], fu
 
     initialize: function(){
       _.bindAll(this, 'render', 'doSearch', 'toggleNotes');
+	  this.notesHidden= true;
     },
 
     toggleNotes: function(e) {

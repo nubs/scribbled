@@ -18,11 +18,20 @@ header{
 	z-index:100;
 }
 footer{
-    bottom: 10px;
+    bottom: 15px;
     position: fixed;
-    right: 20px;
     width: 100%;
-	position:fixed;
+}
+footer .btn-group{
+	right:20px;
+}
+footer .searchForm{
+	left:20px;
+	position:relative;
+}
+.btn-selected{
+	color:#095369;
+	opacity:.9;
 }
 .containerPos{
 	position:relative;
