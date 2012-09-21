@@ -1,4 +1,4 @@
-define(['underscore', 'backbone', 'views/slide'], function(_, Backbone, SlideView) {
+define(['underscore', 'backbone', 'views/slideResult'], function(_, Backbone, SlideResultView) {
   /* A Backbone View is responsible for a single element on the page and its
    * children.  Oftentimes its element is created automatically by the view,
    * although the calling method can pass it in as well.  Views can be hooked
@@ -29,6 +29,8 @@ define(['underscore', 'backbone', 'views/slide'], function(_, Backbone, SlideVie
 
     /* Render is responsible for rendering the view to the element. */
     render: function() {
+      this.$el.empty();
+
       /* To render it, we'll loop over the collection and call a helper to add
        * each slide to the view. */
       this.collection.each(this.addSlide);
@@ -46,7 +48,7 @@ define(['underscore', 'backbone', 'views/slide'], function(_, Backbone, SlideVie
        * views for each element in the collection.  All we have to do is pass
        * the slide into the child view, tell the view to render, and then append
        * its element to our list element. */
-      var view = new SlideView({model: slide});
+      var view = new SlideResultView({model: slide});
       this.$el.append(view.render().el);
     }
   });

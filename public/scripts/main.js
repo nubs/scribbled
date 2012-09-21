@@ -37,7 +37,7 @@ require(['jquery', 'backbone', './router'], function($, Backbone, Router) {
    * this code where an element from the DOM is fetched directly.  All of the
    * rest of the code will use whatever is passed in and attach itself to that.
    * */
-  var router = new Router({appEl: $('#app')});
+  var router = new Router({appEl: $('#app'), footerEl: $('#appFooter')});
 
   /* This sets up the ability for the forward/back buttons in the browser to
    * work.  In particular the pushState parameter will make newer browsers

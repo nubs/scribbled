@@ -2,7 +2,7 @@
  * define statement acts very similarly to the require statement, but its
  * return value is used whenever somebody requires this file (in this case,
  * 'router') to pass it back to the calling code. */
-define(['backbone', 'models/slide', 'views/slide', 'views/start'], function(Backbone, Slide, SlideView, StartView) {
+define(['backbone', 'models/slide', 'collections/slides', 'views/footer', 'views/slide', 'views/slides', 'views/start'], function(Backbone, Slide, Slides, FooterView, SlideView, SlidesView, StartView) {
   /* A backbone router is responsible for responding to changes in the url for
    * the application.  Any url goes through the routes configuration to find a
    * match (wildcards and parameters can be used) and call the appropriate
@@ -13,7 +13,8 @@ define(['backbone', 'models/slide', 'views/slide', 'views/start'], function(Back
       /* The empty route is the default route when no path is specified. In
        * this case lets set it up to map to the index method. */
       '': 'index',
-	  'start': 'start'
+      'start': 'start',
+      'search/:tags': 'search'
     },
 
     /* We don't want the router to be responsible for loading the base
@@ -21,6 +22,9 @@ define(['backbone', 'models/slide', 'views/slide', 'views/start'], function(Back
      * constructor. */
     initialize: function(options) {
       this.appEl = options.appEl;
+      this.footerView = new FooterView({app: this});
+      options.footerEl.html(this.footerView.el);
+      this.footerView.render();
     },
 
     index: function() {
@@ -35,7 +39,7 @@ define(['backbone', 'models/slide', 'views/slide', 'views/start'], function(Back
       /* Even though we haven't caused the pailsView to render yet, it already
        * has an element assigned to it (all views do), so lets go ahead and
        * attach its element to the DOM. */
-      this.appEl.append(this.slideView.el);
+      this.appEl.html(this.slideView.el);
 
       /* Now that we have the pails collection hooked into a view, and that
        * view is hooked into the application, we can go ahead and fetch the
@@ -44,12 +48,22 @@ define(['backbone', 'models/slide', 'views/slide', 'views/start'], function(Back
        * the fetch is completed and everything proceeds beautifully. */
       this.slide.fetch();
     },
-	start: function(){
-		/* page that contain static starting points and ui for create a slide or searching for a slide*/
-		this.startView = new StartView();
-		this.appEl.append(this.startView.el);
-		this.startView.render();
-	}
+
+    start: function(){
+      /* page that contain static starting points and ui for create a slide or searching for a slide*/
+      this.startView = new StartView();
+      this.appEl.html(this.startView.el);
+      this.startView.render();
+    },
+
+    search: function(tags) {
+      var slides = new Slides();
+
+      var slidesView = new SlidesView({collection: slides});
+      this.appEl.html(slidesView.el);
+
+      slides.fetch({data: {tags: tags.split(',')}});
+    }
   });
 
   return Router;
