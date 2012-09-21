@@ -3,7 +3,7 @@
 <input type="hidden" id="yPos" value="{{position.y}}" />
 <label>Description</label><textarea id="description">{{description}}</textarea>
 <label>Links</label><input type="text" id="link" value="{{sources.0.url}}" />
-<button id="learnRegLink" class="btn btn-info"><i class="icon-cloud icon-large icon-white"></i>&nbsp;Learning Registry</button>
+<button id="learnRegLink" class="btn btn-info"><i class="icon-cloud icon-large icon-white"></i>&nbsp;Registry Sources</button>
 <label>Icon</label>
 {{#each icons}}
 <div class="pull-left dialogIcon">
@@ -12,4 +12,5 @@
 </div>
 {{/each}}
 <button id="saveNoteButton" class="btn btn-info"><i class="icon-save icon-large icon-white"></i>&nbsp;Save</button>
+<button id="saveNoteButton" class="btn btn-info"><i class="icon-upload-alt icon-large icon-white"></i>&nbsp;Push To Registry</button>
 </div>
