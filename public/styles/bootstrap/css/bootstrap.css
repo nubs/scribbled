@@ -772,11 +772,13 @@ dd {
   margin-left: 180px;
 }
 
+
 hr {
-  margin: 20px 0;
-  border: 0;
-  border-top: 1px solid #eeeeee;
-  border-bottom: 1px solid #ffffff;
+    border-color: #CCCCCC;
+    border-image: none;
+    border-style: dotted none;
+    border-width: 1px 0 0;
+    margin: 15px 0;
 }
 
 abbr[title] {
