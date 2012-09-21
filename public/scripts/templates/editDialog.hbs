@@ -1,10 +1,12 @@
 <div>
 <input type="hidden" id="xPos" value="{{position.x}}" />
 <input type="hidden" id="yPos" value="{{position.y}}" />
-<label>Description</label><textarea id="description">{{description}}</textarea>
-<label>Links</label><input type="text" id="link" value="{{sources.0.url}}" />
+<label>Write a description</label><textarea id="description">{{description}}</textarea>
+<hr>
+<label>Link web sources</label><input type="text" id="link" value="{{sources.0.url}}" />
 <button id="learnRegLink" class="btn btn-info"><i class="icon-cloud icon-large icon-white"></i>&nbsp;Registry Sources</button>
-<label>Icon</label>
+<hr>
+<label>Choose an icon</label>
 {{#each icons}}
 <div class="pull-left dialogIcon">
 <input class="pull-left" type="radio" {{#if this.selected}}checked="checked"{{/if}} name="icon" id="{{this.class}}" />
