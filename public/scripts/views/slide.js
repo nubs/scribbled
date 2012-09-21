@@ -30,6 +30,7 @@ define(['backbone', 'handlebars', 'text!templates/slide.hbs', 'underscore', 'vie
 
     zoomIn: function(e) {
       if (!this.zoomed) {
+        this.options.app.trigger('zoomIn');
         this.zoomed = true;
         var target = $(e.target);
         var offset = target.offset();
@@ -40,12 +41,23 @@ define(['backbone', 'handlebars', 'text!templates/slide.hbs', 'underscore', 'vie
       }
     },
 
+    zoomOut: function(e) {
+      if (this.zoomed) {
+        console.log('zoomedOut');
+        this.zoomed = false;
+        this.render();
+	this.$('img').css('cursor','-moz-zoom-in');
+        this.sizeToFit();
+      }
+    },
+
     initialize: function(){
-      _.bindAll(this, 'render', 'sizeToFit', 'zoomIn', 'hideNotes', 'showNotes', 'triggerModel');
+      _.bindAll(this, 'render', 'sizeToFit', 'zoomIn', 'zoomOut', 'hideNotes', 'showNotes', 'triggerModel');
       this.model.on('change', this.render);
       this.model.on('change', this.triggerModel);
       this.options.app.on('hideNotes', this.hideNotes);
       this.options.app.on('showNotes', this.showNotes);
+      this.options.app.on('zoomOut', this.zoomOut);
     },
 
     triggerModel: function(){
