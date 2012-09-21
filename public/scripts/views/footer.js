@@ -10,8 +10,10 @@ define(['backbone', 'handlebars', 'text!templates/footer.hbs', 'underscore'], fu
     className: 'footerSearch form-inline',
     events: {
       submit: 'doSearch',
-      'click #hideNotes': 'toggleNotes'
+      'click #toggleNotes': 'toggleNotes'
     },
+
+    notesHidden: false,
 
     /* We loaded the template into the startTemplate above, now we go ahead and
      * compile the template into a function that takes the parameters that the
@@ -23,11 +25,13 @@ define(['backbone', 'handlebars', 'text!templates/footer.hbs', 'underscore'], fu
     },
 
     toggleNotes: function(e) {
-      if (e.currentTarget.checked) {
+      this.notesHidden = !this.notesHidden;
+      if (this.notesHidden) {
         this.options.app.trigger('hideNotes');
       } else {
         this.options.app.trigger('showNotes');
       }
+      this.render();
     },
 
     render: function() {
@@ -35,7 +39,7 @@ define(['backbone', 'handlebars', 'text!templates/footer.hbs', 'underscore'], fu
        * into an object that just has the data fields (toJSON does this) and
        * passing that into the template.  Use jquery to set the html of the
        * element to the results of the template and we're good to go. */
-      this.$el.html(this.template());
+      this.$el.html(this.template({notesHidden: this.notesHidden}));
       return this;
     },
 
