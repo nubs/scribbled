@@ -2,8 +2,7 @@
 	  font-family: chalkType ;  
 	  src: url('../images/fonts/DKCrayonCrumble.ttf') format("truetype");  
 	}
-h1, h2, h3, h4{ font-family: chalkType , helvetica, sans-serif;  
-	}  
+h1, h2, h3, h4{ font-family: chalkType , helvetica, sans-serif; }  
 
 body{
 	background:#000;
@@ -191,12 +190,59 @@ h1.logo a, h1.logo a:hover {
 	-o-animation: getStartedBtn 1s; 
 }**/
 
+/*jQuery UI customized colors*/
+.ui-widget-header{
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#5bc0de), to(#2f96b4));
+	background-image: -webkit-linear-gradient(top, #5bc0de, #2f96b4);
+	background-image: -o-linear-gradient(top, #5bc0de, #2f96b4);
+	background-image: linear-gradient(to bottom, #5bc0de, #2f96b4);
+	background-image: -moz-linear-gradient(top, #5bc0de, #2f96b4);
+	background-repeat: repeat-x;
+	border-color: #2f96b4 #2f96b4 #1f6377;
+	border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+	border-radius:0px;
+}
+.ui-dialog .ui-dialog-title{	
+	font-family: chalkType , helvetica, sans-serif; 
+	font-size:30px;
+	color:#f5f5f5;
+}
 
-
-
-
-
-
+.ui-widget-header .ui-icon{
+	 background-image: url("http://jqueryui.com/themeroller/images/?new=f5f5f5&w=256&h=240&f=png&fltr[]=rcd|256&fltr[]=mask|icons/icons.png");
+}
+.ui-state-hover .ui-icon:hover{
+	 background-image: url("images/ui-icons_222222_256x240.png")
+}
+.ui-dialog{
+	background: -moz-linear-gradient(top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.75) 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0.75)), color-stop(100%,rgba(0,0,0,0.75))); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top, rgba(0,0,0,0.75) 0%,rgba(0,0,0,0.75) 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top, rgba(0,0,0,0.75) 0%,rgba(0,0,0,0.75) 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top, rgba(0,0,0,0.75) 0%,rgba(0,0,0,0.75) 100%); /* IE10+ */
+	background: linear-gradient(to bottom, rgba(0,0,0,0.75) 0%,rgba(0,0,0,0.75) 100%); /* W3C */
+    border: 0px;
+	-webkit-box-shadow: 0px 0px 0px 10px rgba(0, 0, 0, .5);
+	box-shadow: 0px 0px 0px 10px rgba(0, 0, 0, .5);
+	padding:0px;
+}
+.ui-widget-content{
+    color: #fff;
+}
+.ui-widget select, .ui-widget textarea, .ui-widget button{
+	font-size:14px;
+}
+.ui-widget input{
+	font-size:11px;
+}
+button#saveNoteButton{margin-top:5px;}
+button#saveNoteButton i{
+	padding:3px 3px 0px 0px;
+}
+.dialogIcon{
+	margin-right:12px;
+}
+.dialogIcon label{margin-top:5px;}
 
 
 
