@@ -254,7 +254,7 @@ h1.logo a, h1.logo a:hover {
 	font-size:11px;
 }
 button#saveNoteButton{margin-top:5px;}
-button#saveNoteButton i{
+button#saveNoteButton i, button#learnRegLink i{
 	padding:3px 3px 0px 0px;
 }
 .dialogIcon{
