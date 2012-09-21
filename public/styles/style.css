@@ -244,31 +244,6 @@ button#saveNoteButton i{
 }
 .dialogIcon label{margin-top:5px;}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 [class^="icon-"], [class*=" icon-"] {
   float: left;
 }
@@ -280,4 +255,39 @@ button#saveNoteButton i{
 
 .ui-widget-content a {
     color: #0088CC;
+}
+
+@media (max-width: 767px) {
+  .hidden-desktop {
+    display: inherit !important;
+  }
+  .visible-desktop {
+    display: none !important;
+  }
+  .visible-phone {
+    display: inherit !important;
+  }
+  .hidden-phone {
+    display: none !important;
+  }
+  header{
+	transform:scale(.7,.7);
+	-moz-transform:scale(.7,.7); /* Firefox */
+	-webkit-transform:scale(.7,.7); /* Safari and Chrome */
+	float:left;
+	text-align:center;
+  }
+  .noMobile{display:none;}
+  #appFooter{
+	text-align:center;
+	}
+  #appFooter div{
+	float:none;
+	margin:5px auto;
+	}
+#appFooter .searchForm{
+	left:0;
+	}
+	.containerPos{padding:0px;}
+	body{padding:10px;}
 }
