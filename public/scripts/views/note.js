@@ -17,7 +17,14 @@ define(['backbone', 'handlebars', 'text!templates/editDialog.hbs', 'text!templat
 
     events: {
       click: 'showNote',
-      'click .note .icon-edit': 'editNote'
+      'click .note .icon-edit': 'editNote',
+      'click .note .icon-trash': 'removeNote'
+    },
+
+    removeNote: function(e){
+      this.model.destroy();
+      this.remove();
+      e.stopPropagation();
     },
 
     editNote: function(e){

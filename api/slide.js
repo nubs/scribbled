@@ -42,6 +42,16 @@ module.exports = function(mongoose) {
     });
   });
 
+  app.delete('/:id', function(req, res) {
+    Slide.remove({_id: req.params.id}, function(err, slide) {
+      if (err) {
+        res.status(500).send(err);
+      } else {
+        res.send(slide);
+      }
+    });
+  });
+
   app.put('/:id', function(req, res) {
     delete req.body._id;
     Slide.update({_id: req.params.id}, req.body, function(err, numberAffected, raw) {
@@ -65,6 +75,23 @@ module.exports = function(mongoose) {
         res.status(500).send(err);
       } else {
         res.send(req.body);
+      }
+    });
+  });
+
+  app.delete('/:id/notes/:noteId', function(req, res) {
+    Slide.findOne({_id: req.params.id}, function(err, slide) {
+      if (err) {
+        res.status(500).send(err);
+      } else {
+        slide.notes.id(req.params.noteId).remove();
+        slide.save(function (err) {
+          if (err) {
+            res.status(500).send(err);
+          } else {
+            res.status(204);
+          }
+        });
       }
     });
   });
