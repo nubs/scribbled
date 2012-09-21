@@ -10,7 +10,8 @@ define(['backbone', 'handlebars', 'text!templates/footer.hbs', 'underscore'], fu
     className: 'footerSearch form-inline',
     events: {
       submit: 'doSearch',
-      'click #toggleNotes': 'toggleNotes'
+      'click #toggleNotes': 'toggleNotes',
+      'click #edit': 'toggleEdit'
     },
 
 
@@ -22,6 +23,16 @@ define(['backbone', 'handlebars', 'text!templates/footer.hbs', 'underscore'], fu
     initialize: function(){
       _.bindAll(this, 'render', 'doSearch', 'toggleNotes');
       this.notesVisible = true;
+    },
+
+    toggleEdit: function(){
+      if (location.pathname.search('edit') != -1) {
+        this.options.app.navigate(location.pathname.replace('edit', 'slides'), {trigger: true});
+      } else if (location.href.search('slide') != -1) {
+        this.options.app.navigate(location.pathname.replace('slides', 'edit'), {trigger: true});
+      } else {
+        this.options.app.navigate('/edit/505c80752932c4db13000007', {trigger: true});
+      }
     },
 
     toggleNotes: function(e) {
