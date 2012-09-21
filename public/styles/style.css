@@ -49,10 +49,12 @@ h1.logo a, h1.logo a:hover {
 	color:#f5f5f5;
 	text-decoration:none;
 }
-.logo img{margin-left:8px;}
+.logo img{
+	margin-left:8px;
+}
 .headerRight{
 	position:relative;
-	top:-85px;
+	top:-95px;
 	left:-20px;
 }
 .footerSearch{
@@ -69,7 +71,9 @@ h1.logo a, h1.logo a:hover {
 .getStartedBtn h1{
 	font-size:34px;
 }
-.getStartedBtn a:hover{text-decoration:none;}
+.getStartedBtn a:hover{
+	text-decoration:none;
+}
 
 .note, .startFormOption{
 	background: -moz-linear-gradient(top, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.4) 100%); /* FF3.6+ */
@@ -84,7 +88,7 @@ h1.logo a, h1.logo a:hover {
 	border-radius: 5px;
 	width:300px;
 	left: -150px;
-        top: 42px;
+    top: 42px;
 }
 .startFormOption{
 	background: -moz-linear-gradient(top, rgba(255,255,255,0.2) 0%, rgba(245,245,245,0.1) 100%); /* FF3.6+ */
@@ -138,9 +142,8 @@ h1.logo a, h1.logo a:hover {
 	border:5px solid #f5f5f5;
 	overflow:hidden;
 	display:inline-block;
-	margin:10px;
+	margin:4px;
 }
-
 /***css arrow top***/
 .arrow_box { 
 	position: relative;
