@@ -11,7 +11,8 @@ define(['backbone', 'handlebars', 'text!templates/footer.hbs', 'underscore'], fu
     events: {
       submit: 'doSearch',
       'click #toggleNotes': 'toggleNotes',
-      'click #edit': 'toggleEdit'
+      'click #edit': 'toggleEdit',
+      'click #fullscreen': 'toggleFullscreen'
     },
 
 
@@ -24,6 +25,7 @@ define(['backbone', 'handlebars', 'text!templates/footer.hbs', 'underscore'], fu
       _.bindAll(this, 'render', 'doSearch', 'toggleNotes');
       this.notesVisible = true;
       this.editing = location.pathname.search('edit') != -1;
+      this.fullscreen = false;
     },
 
     toggleEdit: function(){
@@ -48,12 +50,34 @@ define(['backbone', 'handlebars', 'text!templates/footer.hbs', 'underscore'], fu
       this.render();
     },
 
+    toggleFullscreen: function(e) {
+      this.fullscreen = !this.fullscreen;
+      if (this.fullscreen) {
+        if (document.documentElement.requestFullscreen) {
+          document.documentElement.requestFullscreen();
+        } else if (document.documentElement.mozRequestFullScreen) {
+          document.documentElement.mozRequestFullScreen();
+        } else if (document.documentElement.webkitRequestFullScreen) {
+          document.documentElement.webkitRequestFullScreen();
+        }
+      } else {
+        if (document.exitFullscreen) {
+          document.exitFullscreen();
+        } else if (document.mozCancelFullScreen) {
+          document.mozCancelFullScreen();
+        } else if (document.webkitCancelFullScreen) {
+          document.webkitCancelFullScreen();
+        }
+      }
+      this.render();
+    },
+
     render: function() {
       /* Rendering the element is as simple as converting the Backbone model
        * into an object that just has the data fields (toJSON does this) and
        * passing that into the template.  Use jquery to set the html of the
        * element to the results of the template and we're good to go. */
-      this.$el.html(this.template({notesVisible: this.notesVisible, editing: this.editing}));
+      this.$el.html(this.template({notesVisible: this.notesVisible, editing: this.editing, fullscreen: this.fullscreen}));
       return this;
     },
 
