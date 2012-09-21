@@ -2,16 +2,6 @@
 <button type="submit" class="btn btn-info" title="Search"><i class="icon-search icon-white icon-large"></i></button>
 </div>
 
-	<!--- FACEBOOK SDK --->
-	<div id="fb-root"></div>
-	<script>(function(d, s, id) {
-	  var js, fjs = d.getElementsByTagName(s)[0];
-	  if (d.getElementById(id)) return;
-	  js = d.createElement(s); js.id = id;
-	  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=161070997281204";
-	  fjs.parentNode.insertBefore(js, fjs);
-	}(document, 'script', 'facebook-jssdk'));</script>
-
 <div class="btn-group pull-right">
 	<a title="Hide and Show Notes" class="btn btn-info btn-large {{#if notesVisible}}btn-selected{{/if}}" id="toggleNotes"><i class="icon-tags"></i></a>
   <a title="Edit Slide" id="edit" class="btn btn-info btn-large {{#if editing}}btn-selected{{/if}}"><i class="icon-edit"></i></a>
@@ -20,10 +10,18 @@
 	<a title="Download Slide" class="btn btn-info btn-large" href="#"><i class="icon-download-alt"></i></a>
   <a title="Fullscreen" class="btn btn-info btn-large {{#if fullscreen}}btn-selected{{/if}}" id="fullscreen" href="#"><i class="icon-fullscreen"></i></a>
 	<a title="Share URL" class="btn btn-info btn-large" href="#"><i class="icon-link"></i></a>
-	<div title="Post to Facebook" class="btn btn-info btn-large"> <div "fb-like" data-href="{{url}}" data-send="true" data-width="450" data-show-faces="false" data-font="trebuchet ms"></div></div>
+	<div title="Post to Facebook" class="btn btn-info btn-large"> <div class="icon-facebook" id="facebook-jssdk" data-href="{{url}}" data-send="true" data-width="450" data-show-faces="false" data-font="trebuchet ms"></div></div>
 	<a title="Email a Collegue" class="btn btn-info btn-large" href="#"><i class="icon-envelope-alt"></i></a>
 	<a title="View Stats" class="btn btn-info btn-large" href="#"><i class="icon-tasks"></i></a>
 	<a title="Post to Learning Registry" id="learn" class="btn btn-info btn-large"><i class="icon-cloud"></i></a>
 </div>
 
-
+<!--- FACEBOOK SDK --->
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=161070997281204";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
