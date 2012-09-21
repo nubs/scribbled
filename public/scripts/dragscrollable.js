@@ -67,6 +67,8 @@ $.fn.dragscrollable = function( options ){
 				return false; 
 			}
 			
+			//change cursor style
+			$(event.target).css('cursor','-moz-grabbing');
 			// Initial coordinates will be the last when dragging
 			event.data.lastCoord = {left: event.clientX, top: event.clientY}; 
 		
@@ -83,8 +85,6 @@ $.fn.dragscrollable = function( options ){
 			// How much did the mouse move?
 			var delta = {left: (event.clientX - event.data.lastCoord.left),
 						 top: (event.clientY - event.data.lastCoord.top)};
-			//change cursor style
-			$(event.target).css('cursor','-moz-grabbing');
 			// Set the scroll position relative to what ever the scroll is now
 			event.data.scrollable.scrollLeft(
 							event.data.scrollable.scrollLeft() - delta.left);
