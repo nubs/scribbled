@@ -2,7 +2,7 @@
  * define statement acts very similarly to the require statement, but its
  * return value is used whenever somebody requires this file (in this case,
  * 'router') to pass it back to the calling code. */
-define(['backbone', 'models/slide', 'collections/slides', 'views/footer', 'views/slide', 'views/slides', 'views/start'], function(Backbone, Slide, Slides, FooterView, SlideView, SlidesView, StartView) {
+define(['backbone', 'models/slide', 'collections/slides', 'views/footer', 'views/slide', 'views/slideEdit', 'views/slides', 'views/start'], function(Backbone, Slide, Slides, FooterView, SlideView, SlideEditView, SlidesView, StartView) {
   /* A backbone router is responsible for responding to changes in the url for
    * the application.  Any url goes through the routes configuration to find a
    * match (wildcards and parameters can be used) and call the appropriate
@@ -15,6 +15,7 @@ define(['backbone', 'models/slide', 'collections/slides', 'views/footer', 'views
       '': 'index',
       'start': 'start',
       'slides/:id': 'slide',
+      'edit/:id': 'edit',
       'search/:tags': 'search'
     },
 
@@ -45,6 +46,28 @@ define(['backbone', 'models/slide', 'collections/slides', 'views/footer', 'views
        * has an element assigned to it (all views do), so lets go ahead and
        * attach its element to the DOM. */
       this.appEl.html(slideView.el);
+
+      /* Now that we have the pails collection hooked into a view, and that
+       * view is hooked into the application, we can go ahead and fetch the
+       * pails from the API.  Because the pails view is setup to render
+       * whenever its collection gets reset, the render will be triggered when
+       * the fetch is completed and everything proceeds beautifully. */
+      slide.fetch();
+    },
+
+    edit: function(id) {
+      /* Here, we create a new collection that we will be fetching from our api. */
+      var slide = new Slide({_id: id});
+
+      /* The pailsView renders a collection of pails, so we use the Backbone.js
+       * collection parameter to define the collection that the pails view
+       * uses. */
+      var slideEditView = new SlideEditView({model: slide, app: this});
+
+      /* Even though we haven't caused the pailsView to render yet, it already
+       * has an element assigned to it (all views do), so lets go ahead and
+       * attach its element to the DOM. */
+      this.appEl.html(slideEditView.el);
 
       /* Now that we have the pails collection hooked into a view, and that
        * view is hooked into the application, we can go ahead and fetch the
