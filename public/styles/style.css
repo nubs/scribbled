@@ -94,8 +94,16 @@ h1.logo a, h1.logo a:hover {
 .startFormOption button, .footerSearch button{
 	vertical-align: top;
 }
-.footerSearch button i{
-	padding-top:4px;
+.footerSearch button i, .startFormOption button i{
+	padding-top:3px;
+}
+.startFormOption button i{
+	left:-3px;
+	position:relative;
+}
+.noteContainer i{
+	font-size:24px;
+	color:#f5f5f5;
 }
 .slideContainer{
 	-webkit-border-radius: 2px;
