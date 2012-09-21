@@ -13,28 +13,52 @@ module.exports = function(mongoose) {
     }
 
     Slide.find(criteria, function(err, slides) {
-      res.send(slides);
+      if (err) {
+        res.status(500).send(err);
+      } else {
+        res.send(slides);
+      }
     });
   });
 
   app.get('/:id', function(req, res) {
     Slide.findOne({_id: req.params.id}, function(err, slide) {
-      res.send(slide);
+      if (err) {
+        res.status(500).send(err);
+      } else {
+        res.send(slide);
+      }
     });
   });
 
   app.post('/', function(req, res) {
     var slide = new Slide(req.body);
     slide.save(function(err, slide) {
-      res.send(slide);
+      if (err) {
+        res.status(500).send(err);
+      } else {
+        res.send(slide);
+      }
     });
   });
 
   app.put('/:id', function(req, res) {
+    delete req.body._id;
+    for (var i in req.body.notes) {
+      delete req.body.notes[i]._id;
+    }
     Slide.update({_id: req.params.id}, req.body, function(err, numberAffected, raw) {
-      Slide.findOne({_id: req.params.id}, function(err, slide) {
-        res.send(slide);
-      });
+      if (err) {
+        res.status(500).send(err);
+      } else {
+        Slide.findOne({_id: req.params.id}, function(err, slide) {
+          if (err) {
+            res.status(500).send(err);
+          } else {
+            res.send(slide);
+          }
+        });
+      }
     });
   });
 
