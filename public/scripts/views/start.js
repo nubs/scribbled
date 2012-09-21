@@ -33,7 +33,7 @@ define(['backbone', 'handlebars', 'text!templates/start.hbs', 'underscore', 'mod
     addImageUrl: function(e) {
       e.preventDefault();
 
-      var slide = new Slide({title: this.$('#imageTitle').val(), imageUrl: this.$('#imageUrl').val()});
+      var slide = new Slide({title: this.$('#imageTitle').val(), tags: this.$('#imageTitle').val().split(' '), imageUrl: this.$('#imageUrl').val()});
 
       slide.save().done(_.bind(function(data) {
         this.options.app.navigate('slides/' + data._id, {trigger: true});
