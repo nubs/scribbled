@@ -8,12 +8,25 @@ define(['backbone', 'handlebars', 'text!templates/footer.hbs', 'underscore'], fu
   var FooterView = Backbone.View.extend({
     tagName: 'form',
     className: 'footerSearch form-inline',
+    zoomed: false,
     events: {
       submit: 'doSearch',
       'click #toggleNotes': 'toggleNotes',
       'click #edit': 'toggleEdit',
       'click #fullscreen': 'toggleFullscreen',
-      'click #learn': 'learningRegistry'
+      'click #learn': 'learningRegistry',
+      'click #zoomOut': 'zoomOut'
+    },
+
+    zoomOut: function(){
+      this.options.app.trigger('zoomOut');
+      this.zoomed=false;
+      this.render();
+    },
+
+    zoomIn: function(){
+      this.zoomed=true;
+      this.render();
     },
 
     learningRegistry: function(){
@@ -42,8 +55,9 @@ define(['backbone', 'handlebars', 'text!templates/footer.hbs', 'underscore'], fu
     template: Handlebars.compile(footerTemplate),
 
     initialize: function(){
-      _.bindAll(this, 'render', 'doSearch', 'toggleNotes', 'saveModel', 'resetFullscreen');
+      _.bindAll(this, 'render', 'doSearch', 'toggleNotes', 'saveModel', 'resetFullscreen', 'zoomIn', 'zoomOut');
       this.options.app.on('modelChanged', this.saveModel);
+      this.options.app.on('zoomIn', this.zoomIn);
       this.notesVisible = true;
       this.editing = location.pathname.search('edit') != -1;
       this.fullscreen = false;
@@ -110,7 +124,13 @@ define(['backbone', 'handlebars', 'text!templates/footer.hbs', 'underscore'], fu
        * into an object that just has the data fields (toJSON does this) and
        * passing that into the template.  Use jquery to set the html of the
        * element to the results of the template and we're good to go. */
-      this.$el.html(this.template({notesVisible: this.notesVisible, editing: this.editing, fullscreen: this.fullscreen, url: location.href}));
+      this.$el.html(this.template({
+        notesVisible: this.notesVisible,
+        editing: this.editing,
+        fullscreen: this.fullscreen,
+        url: location.href,
+        notZoomed: !this.zoomed
+      }));
       return this;
     },
 
