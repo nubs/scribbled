@@ -39,7 +39,7 @@ define(['backbone', 'models/slide', 'collections/slides', 'views/footer', 'views
       /* Even though we haven't caused the pailsView to render yet, it already
        * has an element assigned to it (all views do), so lets go ahead and
        * attach its element to the DOM. */
-      this.appEl.append(this.slideView.el);
+      this.appEl.html(this.slideView.el);
 
       /* Now that we have the pails collection hooked into a view, and that
        * view is hooked into the application, we can go ahead and fetch the
@@ -52,7 +52,7 @@ define(['backbone', 'models/slide', 'collections/slides', 'views/footer', 'views
     start: function(){
       /* page that contain static starting points and ui for create a slide or searching for a slide*/
       this.startView = new StartView();
-      this.appEl.append(this.startView.el);
+      this.appEl.html(this.startView.el);
       this.startView.render();
     },
 
@@ -60,7 +60,7 @@ define(['backbone', 'models/slide', 'collections/slides', 'views/footer', 'views
       var slides = new Slides();
 
       var slidesView = new SlidesView({collection: slides});
-      this.appEl.append(slidesView.el);
+      this.appEl.html(slidesView.el);
 
       slides.fetch({data: {tags: tags.split(',')}});
     }
