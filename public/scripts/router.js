@@ -16,7 +16,7 @@ define(['backbone', 'models/slide', 'collections/slides', 'views/footer', 'views
       'start': 'start',
       'slides/:id': 'slide',
       'edit/:id': 'edit',
-      'search/:tags': 'search'
+      'search/*tags': 'search'
     },
 
     /* We don't want the router to be responsible for loading the base
@@ -90,7 +90,12 @@ define(['backbone', 'models/slide', 'collections/slides', 'views/footer', 'views
       var slidesView = new SlidesView({collection: slides});
       this.appEl.html(slidesView.el);
 
-      slides.fetch({data: {tags: tags.split(',')}});
+      var data = {};
+      if (tags) {
+        data.tags = tags.split(',');
+      }
+
+      slides.fetch({data: data});
     }
   });
 

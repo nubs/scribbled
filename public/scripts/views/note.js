@@ -17,7 +17,14 @@ define(['backbone', 'handlebars', 'text!templates/editDialog.hbs', 'text!templat
 
     events: {
       click: 'showNote',
-      'click .note .icon-edit': 'editNote'
+      'click .note .icon-edit': 'editNote',
+      'click .note .icon-trash': 'removeNote'
+    },
+
+    removeNote: function(e){
+      this.model.destroy();
+      this.remove();
+      e.stopPropagation();
     },
 
     editNote: function(e){
@@ -38,6 +45,9 @@ define(['backbone', 'handlebars', 'text!templates/editDialog.hbs', 'text!templat
       this.editDiv = $(this.editTemplate(templateVars));
       this.editDiv.dialog({"title": "Edit Note"});
       this.editDiv.find('#saveNoteButton').click(_.bind(this.editNoteButton, this));
+      this.editDiv.find('#learnRegLink').click(function(){
+        $('#learn').click();
+      });
       e.stopPropagation();
     },
 
