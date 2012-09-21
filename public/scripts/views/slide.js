@@ -1,7 +1,7 @@
 /* You'll notice here that the template dependency is a little different. The
  * requirejs-text plugin allows requirejs to load dependent strings from files.
  * Here we load the handlebars template into the string slideTemplate. */
-define(['backbone', 'handlebars', 'text!templates/slide.hbs', 'underscore', 'views/note', 'jqueryui'], function(Backbone, Handlebars, slideTemplate, _, NoteView) {
+define(['backbone', 'handlebars', 'text!templates/slide.hbs', 'underscore', 'views/note', 'jqueryui', 'drag'], function(Backbone, Handlebars, slideTemplate, _, NoteView) {
   /* This view is meant to render a single slide to a list element.  We'd
    * probably have a few different slideTemplates, 1 for the list of them and
    * another for the 'details' page, for instance. */
@@ -47,10 +47,7 @@ define(['backbone', 'handlebars', 'text!templates/slide.hbs', 'underscore', 'vie
        * passing that into the template.  Use jquery to set the html of the
        * element to the results of the template and we're good to go. */
       this.$el.html(this.template(this.model.toJSON()));
-      this.$el.find('div:first').css({
-        'background-image': "url('" + this.model.get('imageUrl') + "')",
-        'background-repeat': 'no-repeat'
-      });
+      this.$el.dragscrollable();
       this.$el.find('img').on('load', this.sizeToFit);
       $(window).resize(this.sizeToFit);
       this.notes = this.model.get('notes');
@@ -78,27 +75,41 @@ define(['backbone', 'handlebars', 'text!templates/slide.hbs', 'underscore', 'vie
       if (maxWidth/maxHeight > this.imageWidth/this.imageHeight) {
         divHeight = maxHeight;
         if (!this.zoomed) {
-          this.$el.find('div:first').css('background-size', 'auto ' + maxHeight + 'px');
+          this.$el.find('img').css({
+            'width': 'auto',
+            'height': maxHeight 
+          });
           divWidth = divHeight * this.imageWidth/this.imageHeight;
         } else {
-          this.$el.find('div:first').css('background-size', this.imageWidth + 'px ' + this.imageHeight + 'px');
+          this.$el.find('img').css({
+            'width': 'auto',
+            'height': 'auto' 
+          });
           divWidth = maxWidth;
         }
       } else {
         divWidth = maxWidth;
         if (!this.zoomed) {
-          this.$el.find('div:first').css('background-size', maxWidth + 'px auto');
+          this.$el.find('img').css({
+            'width': maxWidth,
+            'height': 'auto' 
+          });
           divHeight = divWidth * this.imageHeight/this.imageWidth;
         } else {
-          this.$el.find('div:first').css('background-size', this.imageWidth + 'px ' + this.imageHeight + 'px');
+          this.$el.find('img').css({
+            'width': 'auto',
+            'height': 'auto' 
+          });
           dixHeight = maxHeight;
         }
       }
       this.$el.width(divWidth);
       this.$el.height(divHeight);
       if (this.zoomed) {
-        this.$el.find('div:first').width(this.imageWidth);
-        this.$el.find('div:first').height(this.imageHeight);
+        this.$el.find('img').css({
+          'width': this.imageWidth,
+          'height': this.imageHeight 
+        });
         this.$el.css('overflow', 'scroll');
         if (this.zoomToX != 0 && this.zoomToY != 0) {
           this.$el.scrollLeft(Math.min(this.imageWidth - this.$el.width(), this.zoomToX - this.$el.width()/2));
@@ -107,8 +118,10 @@ define(['backbone', 'handlebars', 'text!templates/slide.hbs', 'underscore', 'vie
           this.zoomToY = 0;
         }
       } else {
-        this.$el.find('div:first').width(divWidth);
-        this.$el.find('div:first').height(divHeight);
+        this.$el.find('img').css({
+          'width': divWidth,
+          'height': divHeight 
+        });
       }
       this.renderNotes();
     }
