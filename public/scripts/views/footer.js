@@ -77,7 +77,7 @@ define(['backbone', 'handlebars', 'text!templates/footer.hbs', 'underscore'], fu
        * into an object that just has the data fields (toJSON does this) and
        * passing that into the template.  Use jquery to set the html of the
        * element to the results of the template and we're good to go. */
-      this.$el.html(this.template({notesVisible: this.notesVisible, editing: this.editing, fullscreen: this.fullscreen}));
+      this.$el.html(this.template({notesVisible: this.notesVisible, editing: this.editing, fullscreen: this.fullscreen, url: location.href}));
       return this;
     },
 
