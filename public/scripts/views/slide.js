@@ -37,7 +37,7 @@ define(['backbone', 'handlebars', 'text!templates/slide.hbs', 'underscore', 'vie
     },
 
     initialize: function(){
-      _.bindAll(this, 'render', 'sizeToFit');
+      _.bindAll(this, 'render', 'sizeToFit', 'zoomIn');
       this.model.on('change', this.render);
     },
 
@@ -59,6 +59,7 @@ define(['backbone', 'handlebars', 'text!templates/slide.hbs', 'underscore', 'vie
     },
 
     renderNotes: function(){
+      this.$el.find('.noteContainer').remove();
       _.each(this.notes, _.bind(function(note) {
         var view = new NoteView({model: new Backbone.Model(note), imageHeight: this.imageHeight, imageWidth: this.imageWidth});
         this.$el.append(view.render().el);

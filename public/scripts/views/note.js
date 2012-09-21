@@ -7,11 +7,21 @@ define(['backbone', 'handlebars', 'text!templates/note.hbs', 'underscore'], func
    * another for the 'details' page, for instance. */
   var NoteView = Backbone.View.extend({
     tagName: 'div',
+    className: 'noteContainer',
 
     /* We loaded the template into the slideTemplate above, now we go ahead and
      * compile the template into a function that takes the parameters that the
      * template expects as a parameter. */
     template: Handlebars.compile(noteTemplate),
+
+    events: {
+      click: 'showNote'
+    },
+
+    showNote: function(e){
+      this.$el.find('.note').toggle();
+      e.stopPropagation();
+    },
 
     initialize: function(){
       _.bindAll(this, 'render');
