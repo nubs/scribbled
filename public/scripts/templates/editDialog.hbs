@@ -5,11 +5,10 @@
 <label>Links</label><input type="text" id="link" value="{{sources.0.url}}" />
 <label>Icon</label>
 {{#each icons}}
-<div class="pull-left" style="margin-right:10px;">
-
+<div class="pull-left dialogIcon">
 <input class="pull-left" type="radio" {{#if this.selected}}checked="checked"{{/if}} name="icon" id="{{this.class}}" />
-<label for="{{this.class}}" class="icon-{{this.class}}"></label>
+<label for="{{this.class}}" class="icon-{{this.class}} icon-large"></label>
 </div>
 {{/each}}
-<button id="saveNoteButton"><i class="icon-save icon-large icon-white"></i>&nbsp;Save</button>
+<button id="saveNoteButton" class="btn btn-info"><i class="icon-save icon-large icon-white"></i>&nbsp;Save</button>
 </div>
