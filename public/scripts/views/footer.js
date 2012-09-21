@@ -23,9 +23,11 @@ define(['backbone', 'handlebars', 'text!templates/footer.hbs', 'underscore'], fu
     initialize: function(){
       _.bindAll(this, 'render', 'doSearch', 'toggleNotes');
       this.notesVisible = true;
+      this.editing = location.pathname.search('edit') != -1;
     },
 
     toggleEdit: function(){
+      this.editing = !this.editing;
       if (location.pathname.search('edit') != -1) {
         this.options.app.navigate(location.pathname.replace('edit', 'slides'), {trigger: true});
       } else if (location.href.search('slide') != -1) {
@@ -33,6 +35,7 @@ define(['backbone', 'handlebars', 'text!templates/footer.hbs', 'underscore'], fu
       } else {
         this.options.app.navigate('/edit/505c80752932c4db13000007', {trigger: true});
       }
+      this.render();
     },
 
     toggleNotes: function(e) {
@@ -50,7 +53,7 @@ define(['backbone', 'handlebars', 'text!templates/footer.hbs', 'underscore'], fu
        * into an object that just has the data fields (toJSON does this) and
        * passing that into the template.  Use jquery to set the html of the
        * element to the results of the template and we're good to go. */
-      this.$el.html(this.template({notesVisible: this.notesVisible}));
+      this.$el.html(this.template({notesVisible: this.notesVisible, editing: this.editing}));
       return this;
     },
 
