@@ -23,13 +23,14 @@
     be on every page, so a header/footer and a main container for the
     application are generally all that will go here.  -->
 	
+	
 	<!--- FACEBOOK SDK --->
 	<div id="fb-root"></div>
 	<script>
 	  window.fbAsyncInit = function() {
 		FB.init({
 		  appId      : '161070997281204', // App ID
-		  channelUrl : '//chalked.heroku.com/channel.html', // Channel File
+		  channelUrl : '//chalked.herokuapp.com/channel.html', // Channel File
 		  status     : true, // check login status
 		  cookie     : true, // enable cookies to allow the server to access the session
 		  xfbml      : true  // parse XFBML
@@ -57,7 +58,6 @@
 	  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=161070997281204";
 	  fjs.parentNode.insertBefore(js, fjs);
 	}(document, 'script', 'facebook-jssdk'));</script>
-	
 	<!--- START HEADER --->
 	<header>
 	<h1 class="logo"><a href="/">Scribbled<img src="images/marker-icon.png" /></a></h1>
