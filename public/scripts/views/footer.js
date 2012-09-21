@@ -79,6 +79,7 @@ define(['backbone', 'handlebars', 'text!templates/footer.hbs', 'underscore'], fu
       } else {
         this.options.app.navigate('/edit/505c80752932c4db13000007', {trigger: true});
       }
+      this.zoomed = false;
       this.render();
     },
 
