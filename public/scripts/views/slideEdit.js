@@ -35,6 +35,16 @@ define(['backbone', 'handlebars', 'views/slide', 'text!templates/editDialog.hbs'
           {class:"tags"},
           {class:"camera"},
           {class:"map-marker"}
+        ],
+        iconColors: [
+          {class:"white", selected: true},
+          {class:"black"},
+          {class:"red"},
+          {class:"green"},
+          {class:"blue"},
+          {class:"yellow"},
+          {class:"purple"},
+          {class:"orange"}
         ]
       };
       this.editDiv = $(this.editTemplate(templateVars));
@@ -50,6 +60,7 @@ define(['backbone', 'handlebars', 'views/slide', 'text!templates/editDialog.hbs'
       var newNote = {
         description: $('#description', this.editDiv).val(),
         icon: $(":radio:checked[name='icon']", this.editDiv).attr('id'),
+        iconColor: $(this.editDiv).find('#iconColor').val(),
         position: {
           x:$("#xPos", this.editDiv).val(),
           y:$("#yPos", this.editDiv).val()
